@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM Manipulation - Ammar Ahmed</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif; background: #f1f4e8; color: #1f2a1f; margin: 0; padding: 20px; }
+        .dark-theme { background: #14281d; color: #d9e4c8; }
+        .controls { display: flex; gap: 10px; flex-wrap: wrap; margin-bottom: 15px; }
+        button, input { padding: 8px 12px; border: 1px solid #6b7a2f; border-radius: 4px; }
+        button { background: #1b4332; color: #fff; cursor: pointer; }
+        button:hover { background: #6b7a2f; }
+        #gallery { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+        .card { border: 1px solid #6b7a2f; border-radius: 8px; padding: 12px; background: rgba(163, 177, 138, 0.25); }
+        .card h2 { margin-top: 0; color: #6b7a2f; }
+    </style>
+</head>
+<body>
+
+    <h1>Ammar Ahmed - Projects</h1>
+
+    <div class="controls">
+        <button id="themeToggle">Toggle Theme</button>
+        <button id="addProject">Add Project</button>
+        <input id="search" placeholder="Search projects">
+    </div>
+
+    <div id="gallery"></div>
+
+    <script>
+        const gallery = document.querySelector("#gallery");
+        const themeToggle = document.querySelector("#themeToggle");
+        const addProject = document.querySelector("#addProject");
+        const search = document.querySelector("#search");
+
+        let projects = [
+            { title: "Campus Connect", description: "Student notice board web app." },
+            { title: "TaskFlow", description: "Task manager with full CRUD." },
+            { title: "WeatherNow", description: "Live weather dashboard using an API." }
+        ];
+
+        // extra projects that get added one by one when "Add Project" is clicked
+        const reserve = [
+            { title: "QuizMaster", description: "Timed multiple-choice quiz app." },
+            { title: "Expense Tracker", description: "Tracks daily expenses with charts." },
+            { title: "Study Planner", description: "Weekly timetable and reminder app." }
+        ];
+        let reserveIndex = 0;
+
+        function renderProjects(list = projects) {
+            gallery.innerHTML = "";
+            list.forEach(project => {
+                const card = document.createElement("article");
+                card.className = "card";
+
+                const title = document.createElement("h2");
+                title.textContent = project.title;
+
+                const desc = document.createElement("p");
+                desc.textContent = project.description;
+
+                const removeBtn = document.createElement("button");
+                removeBtn.textContent = "Remove";
+                removeBtn.onclick = () => {
+                    projects = projects.filter(p => p !== project);
+                    renderProjects();
+                };
+
+                card.append(title, desc, removeBtn);
+                gallery.appendChild(card);
+            });
+        }
+
+        addProject.onclick = () => {
+            const next = reserve[reserveIndex % reserve.length];
+            reserveIndex++;
+            projects.push({ ...next });
+            renderProjects();
+        };
+
+        themeToggle.onclick = () => {
+            document.body.classList.toggle("dark-theme");
+            sessionStorage.setItem(
+                "theme",
+                document.body.classList.contains("dark-theme") ? "dark" : "light"
+            );
+        };
+
+        if (sessionStorage.getItem("theme") === "dark")
+            document.body.classList.add("dark-theme");
+
+        search.oninput = () => {
+            const q = search.value.toLowerCase();
+            renderProjects(projects.filter(p => p.title.toLowerCase().includes(q)));
+        };
+
+        renderProjects();
+
+        // open index.html?demo for a ready-made screenshot (dark theme + one add + one remove)
+        if (new URLSearchParams(location.search).has("demo")) {
+            document.body.classList.add("dark-theme");
+            addProject.click();
+            const firstCard = gallery.querySelector("article");
+            if (firstCard) firstCard.querySelector("button").click();
+        }
+    </script>
+
+</body>
+</html>

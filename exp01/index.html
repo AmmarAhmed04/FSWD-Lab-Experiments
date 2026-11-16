@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ammar Ahmed - Portfolio</title>
+</head>
+<body>
+
+    <header>
+        <h1>Ammar Ahmed</h1>
+        <nav>
+            <a href="#about">About</a> |
+            <a href="#skills">Skills</a> |
+            <a href="#projects">Projects</a> |
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <main>
+        <section id="about">
+            <h2>About Me</h2>
+            <img src="profile.png" alt="Ammar Ahmed" width="90">
+            <p>
+                I am a B.E. Computer Science and Engineering student at Lords Institute of
+                Engineering and Technology, Hyderabad. I enjoy building web applications
+                and I am learning the MERN stack.
+            </p>
+        </section>
+
+        <section id="skills">
+            <h2>Skills</h2>
+            <table border="1">
+                <tr><th>Skill Name</th><th>Rating</th></tr>
+                <tr><td>HTML &amp; CSS</td><td>5/5</td></tr>
+                <tr><td>JavaScript</td><td>4/5</td></tr>
+                <tr><td>React.js</td><td>4/5</td></tr>
+                <tr><td>Node.js &amp; Express</td><td>4/5</td></tr>
+                <tr><td>Python</td><td>4/5</td></tr>
+                <tr><td>MongoDB</td><td>3/5</td></tr>
+            </table>
+        </section>
+
+        <section id="projects">
+            <h2>Projects</h2>
+            <article>
+                <h3>Campus Connect</h3>
+                <p>A notice board web app where students can read and post campus announcements.</p>
+            </article>
+            <article>
+                <h3>TaskFlow</h3>
+                <p>A simple task manager with add, edit, complete and delete features.</p>
+            </article>
+            <article>
+                <h3>WeatherNow</h3>
+                <p>A weather dashboard that shows live conditions for any city using a public API.</p>
+            </article>
+            <article>
+                <h3>QuizMaster</h3>
+                <p>A timed multiple-choice quiz app that tracks the score of each attempt.</p>
+            </article>
+        </section>
+
+        <section id="contact">
+            <h2>Contact Me</h2>
+            <form>
+                <label for="name">Name:</label>
+                <input type="text" id="name" name="name" required>
+
+                <label for="email">Email:</label>
+                <input type="email" id="email" name="email" required>
+
+                <label for="message">Message:</label>
+                <textarea id="message" name="message" required></textarea>
+
+                <button type="submit">Submit</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Ammar Ahmed</p>
+    </footer>
+
+</body>
+</html>

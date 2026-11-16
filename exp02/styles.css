@@ -1,0 +1,118 @@
+/* styles.css - dark green & olive theme */
+
+:root {
+    --dark-green: #1b4332;
+    --olive: #6b7a2f;
+    --olive-light: #a3b18a;
+    --bg: #f1f4e8;
+    --text: #1f2a1f;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Tahoma, sans-serif;
+    color: var(--text);
+    background: var(--bg);
+    line-height: 1.7;
+    margin: 0;
+}
+
+.site-header {
+    padding: 24px 20px;
+    background: var(--dark-green);
+    color: #f1f4e8;
+    text-align: center;
+}
+
+.main-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 30px;
+    margin-top: 10px;
+}
+
+.main-nav a {
+    color: var(--olive-light);
+    text-decoration: none;
+    font-weight: 600;
+}
+
+.main-nav a:hover {
+    color: #fff;
+    border-bottom: 2px solid var(--olive);
+}
+
+section {
+    max-width: 1000px;
+    margin: 28px auto;
+    padding: 28px;
+    background: #fff;
+    border: 1px solid var(--olive-light);
+    border-left: 6px solid var(--olive);
+    border-radius: 6px;
+}
+
+h2 {
+    color: var(--dark-green);
+    margin-top: 0;
+}
+
+.gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.card {
+    padding: 20px;
+    margin: 4px;
+    border: 1px solid var(--olive-light);
+    border-radius: 8px;
+    background: #f9fbf2;
+    box-shadow: 0 4px 10px rgba(27, 67, 50, 0.18);
+}
+
+.card h3 {
+    margin-top: 0;
+    color: var(--olive);
+}
+
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.contact-form input,
+.contact-form textarea,
+.contact-form button {
+    padding: 11px;
+    border: 1px solid var(--olive-light);
+    border-radius: 5px;
+    font-size: 1rem;
+}
+
+.contact-form button {
+    background: var(--dark-green);
+    color: #fff;
+    cursor: pointer;
+}
+
+.contact-form button:hover {
+    background: var(--olive);
+}
+
+@media (max-width: 768px) {
+    .main-nav {
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .gallery {
+        grid-template-columns: 1fr;
+    }
+}

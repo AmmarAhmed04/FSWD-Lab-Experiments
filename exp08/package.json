@@ -1,0 +1,12 @@
+{
+  "name": "exp08-node-server",
+  "version": "1.0.0",
+  "description": "Basic Node.js HTTP server, event loop and core modules",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "Ammar Ahmed",
+  "license": "ISC",
+  "type": "commonjs"
+}

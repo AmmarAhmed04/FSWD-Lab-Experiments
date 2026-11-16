@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Form Validation - Ammar Ahmed</title>
+    <style>
+        body { font-family: "Segoe UI", Arial, sans-serif; background: #f1f4e8; color: #1f2a1f; padding: 20px; }
+        h1 { color: #1b4332; }
+        form { max-width: 420px; }
+        .error { color: #b00020; font-size: 0.9rem; }
+        #success { color: #1b4332; font-weight: 600; }
+        input, textarea { display: block; width: 100%; margin: 5px 0 4px; padding: 8px; border: 1px solid #6b7a2f; border-radius: 4px; }
+        label { display: block; margin-top: 10px; font-weight: 600; }
+        button { margin-top: 14px; padding: 9px 16px; background: #1b4332; color: #fff; border: 0; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #6b7a2f; }
+    </style>
+</head>
+<body>
+
+    <h1>Contact Ammar Ahmed</h1>
+
+    <form id="contactForm">
+        <label>Name:</label>
+        <input type="text" id="name">
+        <span id="nameError" class="error"></span>
+
+        <label>Email:</label>
+        <input type="text" id="email">
+        <span id="emailError" class="error"></span>
+
+        <label>Message:</label>
+        <textarea id="message" rows="4"></textarea>
+        <span id="messageError" class="error"></span>
+
+        <button type="submit">Submit</button>
+        <p id="formError" class="error"></p>
+        <p id="success"></p>
+    </form>
+
+    <script>
+        const form = document.querySelector("#contactForm");
+        const nameInput = document.querySelector("#name");
+        const emailInput = document.querySelector("#email");
+        const messageInput = document.querySelector("#message");
+
+        const nameRegex = /^[A-Za-z ]+$/;
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+        function validate(input, regex, errorId, text) {
+            if (!input.value.trim())
+                throw new Error("Required fields cannot be empty.");
+            if (regex && !regex.test(input.value.trim())) {
+                document.querySelector(errorId).textContent = text;
+                return false;
+            }
+            document.querySelector(errorId).textContent = "";
+            return true;
+        }
+
+        form.addEventListener("submit", e => {
+            e.preventDefault();
+
+            try {
+                document.querySelector("#formError").textContent = "";
+                document.querySelector("#success").textContent = "";
+
+                const validName = validate(nameInput, nameRegex, "#nameError",
+                    "Name can contain only letters and spaces.");
+
+                const validEmail = validate(emailInput, emailRegex, "#emailError",
+                    "Enter a valid email address.");
+
+                const validMessage = messageInput.value.trim().length >= 10;
+                document.querySelector("#messageError").textContent = validMessage
+                    ? ""
+                    : "Message must contain at least 10 characters.";
+
+                if (validName && validEmail && validMessage)
+                    document.querySelector("#success").textContent =
+                        "Thank you! Your message was submitted successfully.";
+
+            } catch (error) {
+                console.error(error);
+                document.querySelector("#formError").textContent =
+                    "Please fill in all required fields correctly.";
+            } finally {
+                console.log("Validation completed.");
+            }
+        });
+
+        // open index.html?demo for an error-state screenshot
+        if (new URLSearchParams(location.search).has("demo")) {
+            nameInput.value = "Ammar123";
+            emailInput.value = "ammar@@mail";
+            messageInput.value = "Hi";
+            form.dispatchEvent(new Event("submit"));
+        }
+    </script>
+
+</body>
+</html>
